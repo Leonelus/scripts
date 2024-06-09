@@ -31,7 +31,7 @@ local function init(FolderName, Dict)
         makefolder(FolderName)
     end
     
-    local savedData = isfile(FolderName.."/data.json") and Http:JSONDecode(readfile(FolderName.."/data.json"))
+    local savedData = isfile(FolderName.."/data1.json") and Http:JSONDecode(readfile(FolderName.."/data1.json"))
     
     if savedData then
         Data = table_merge(savedData, Dict)
@@ -46,7 +46,7 @@ local function init(FolderName, Dict)
         
         __newindex = function(self, idx, newv)
             Data[idx] = newv
-            writefile(FolderName.."/data.json", Http:JSONEncode(Data))
+            writefile(FolderName.."/data1.json", Http:JSONEncode(Data))
         end
     });
 end
