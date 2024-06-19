@@ -29,16 +29,16 @@ local myData = loadstring(game:HttpGet("https://raw.githubusercontent.com/z4gs/s
     },
     Boss = {
         ["Gyakusatsu"] = false,
-        ["Eto Yoshimura"] = false,
-        ["Koutarou Amon"] = false,
-        ["Nishiki Nishio"] = false,
-        ["Touka Kirishima"] = false
+        ["Eto Yoshimura"] = true,
+        ["Koutarou Amon"] = true,
+        ["Nishiki Nishio"] = true,
+        ["Touka Kirishima"] = true
     },
     DistanceFromNpc = 1,
     DistanceFromBoss = 3,
     TeleportSpeed = 250,
-    ReputationFarm = false,
-    ReputationCashout = false,
+    ReputationFarm = true,
+    ReputationCashout = true,
     AutoKickWhitelist = ""
 })
 
@@ -48,7 +48,7 @@ local array = {
         ["Eto Yoshimura"] = 1250,
         ["Koutarou Amon"] = 750,
         ["Nishiki Nishio"] = 250,
-    		["Touka Kirishima"] = 250
+    	["Touka Kirishima"] = 250
     },
 
     npcs = {["Aogiri Members"] = "GhoulSpawns", Investigators = "CCGSpawns", Humans = "HumanSpawns"},
@@ -168,15 +168,15 @@ end
 
 tab2:AddSlider("TP Speed", function(x)
     myData.TeleportSpeed = x
-end, {min = 90, max = 250}):Set(45)
+end, {min = 90, max = 250}):Set(100)
 
 tab2:AddSlider("Distance from NPC", function(x)
     myData.DistanceFromNpc = x * -1
-end, {min = 0, max = 18}):Set(65)
+end, {min = 0, max = 18}):Set(45)
 
 tab2:AddSlider("Distance from Bosses", function(x)
     myData.DistanceFromBoss = x * -1
-end, {min = 0, max = 16}):Set(55)
+end, {min = 0, max = 16}):Set(50)
 
 labels.p = {label = tab3:AddLabel("Current trainer: "..player.PlayerFolder.Trainers[team.."Trainer"].Value)}
 
