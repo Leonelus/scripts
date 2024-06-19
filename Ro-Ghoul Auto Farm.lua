@@ -32,7 +32,7 @@ local myData = loadstring(game:HttpGet("https://raw.githubusercontent.com/z4gs/s
         ["Eto Yoshimura"] = false,
         ["Koutarou Amon"] = false,
         ["Nishiki Nishio"] = false,
-		    ["Touka Kirishima"] = false
+        ["Touka Kirishima"] = false
     },
     DistanceFromNpc = 1,
     DistanceFromBoss = 3,
@@ -98,6 +98,7 @@ labels = setmetatable({
     Quest = {prefix = "Current Quest: ", label = tab1:AddLabel("Current Quest: None")},
     Yen = {prefix = "Yen: ", label = tab1:AddLabel("Yen: 0"), value = 0, oldval = player.PlayerFolder.Stats.Yen.Value},
     RC = {prefix = "RC: ", label = tab1:AddLabel("RC: 0"), value = 0, oldval = player.PlayerFolder.Stats.RC.Value},
+    Reputation = {prefix = "Reputation: ", label = tab1:AddLabel("Reputation: 0"), value = 0, oldval = player.PlayerFolder.Stats.Reputation.Value},
     EXP = {prefix = "EXP: ", label = tab1:AddLabel("EXP: 0"), value = 0, oldval = player.PlayerFolder.Stats.Experience.Value},
     Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
 }, {
