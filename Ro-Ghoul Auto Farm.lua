@@ -134,7 +134,12 @@ player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
 end)
 
 player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
-    labels("EXP", newValue - labels.EXP.oldval, newValue)
+
+    local expChange = newValue - lastEXPValue
+    
+    lastEXPValue = newValue
+    
+    labels("EXP", expChange)
 end)
 
 btn3 = tab1:AddButton("Reset", function() labels() end)
