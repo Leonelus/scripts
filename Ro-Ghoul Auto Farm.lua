@@ -103,6 +103,7 @@ labels = setmetatable({
     Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
 }, {
     __call = function (self, typ, newv, oldv)
+       print("labels __call invoked with:", typ, newv, oldv)
         if typ and newv then
             local object = self[typ]
             if type(newv) == "number" then
