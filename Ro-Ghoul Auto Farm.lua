@@ -138,6 +138,9 @@ player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
     if deltaEXP > 0 then
         labels("EXP", deltaEXP, newValue)
         labels.EXP.oldval = newValue
+    elseif newValue < labels.EXP.oldval then
+        -- Handle the case when EXP value resets (due to leveling up)
+        labels.EXP.oldval = newValue
     end
 end)
 
