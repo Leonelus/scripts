@@ -103,7 +103,6 @@ labels = setmetatable({
     Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
 }, {
     __call = function (self, typ, newv, oldv)
-       print("labels __call invoked with:", typ, newv, oldv)
         if typ and newv then
             local object = self[typ]
             if type(newv) == "number" then
@@ -129,6 +128,14 @@ labels = setmetatable({
 local function getLabel(la)
     return labels[la].value and labels[la].value or labels[la].label.Text
 end
+
+player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
+    labels("Reputation", newValue - labels.Reputation.oldval, newValue)
+end)
+
+player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
+    labels("EXP", newValue - labels.EXP.oldval, newValue)
+end)
 
 btn3 = tab1:AddButton("Reset", function() labels() end)
 
