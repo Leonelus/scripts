@@ -133,12 +133,13 @@ player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
     labels("Reputation", newValue - labels.Reputation.oldval, newValue)
 end)
 
-local function trackExperienceChange(newExperience)
-    local delta = newExperience - labels.EXP.oldval
-    if delta > 0 then
-        labels("EXP", delta, newExperience)
+player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
+    local deltaEXP = newValue - labels.EXP.oldval
+    if deltaEXP > 0 then
+        labels("EXP", deltaEXP, newValue)
+        labels.EXP.oldval = newValue
     end
-end
+end)
 
 btn3 = tab1:AddButton("Reset", function() labels() end)
 
