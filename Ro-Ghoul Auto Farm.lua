@@ -98,7 +98,7 @@ labels = setmetatable({
     Quest = {prefix = "Current Quest: ", label = tab1:AddLabel("Current Quest: None")},
     Yen = {prefix = "Yen: ", label = tab1:AddLabel("Yen: 0"), value = 0, oldval = player.PlayerFolder.Stats.Yen.Value},
     RC = {prefix = "RC: ", label = tab1:AddLabel("RC: 0"), value = 0, oldval = player.PlayerFolder.Stats.RC.Value},
-    EXP = {prefix = "EXP: ", label = tab1:AddLabel("EXP: 0"), value = 0, oldval = player.PlayerFolder.Stats.EXP.Value},
+    EXP = {prefix = "EXP: ", label = tab1:AddLabel("EXP: 0"), value = 0, oldval = player.PlayerFolder.Stats.Experience.Value},
     Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
 }, {
     __call = function (self, typ, newv, oldv)
