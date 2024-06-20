@@ -140,6 +140,10 @@ player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
     labels("Reputation", newValue - labels.Reputation.oldval, newValue)
 end)
 
+player.PlayerFolder.Stats.Level.Changed:Connect(function(newValue)
+    labels("Levels", newValue - labels.Level.oldval, newValue)
+end)
+
 player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
     local deltaEXP = newValue - labels.EXP.oldval
     if deltaEXP > 0 then
