@@ -141,7 +141,7 @@ player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
 end)
 
 player.PlayerFolder.Stats.Level.Changed:Connect(function(newValue)
-    labels("Levels", newValue - labels.Level.oldval, newValue)
+    labels("LVLs", newValue - labels.Level.oldval, newValue)
 end)
 
 player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
