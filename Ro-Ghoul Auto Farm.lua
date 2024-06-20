@@ -102,7 +102,7 @@ labels = setmetatable({
     Reputation = {prefix = "Reputation: ", label = tab1:AddLabel("Reputation: 0"), value = 0, oldval = player.PlayerFolder.Stats.Reputation.Value},
     EXP = {prefix = "EXP: ", label = tab1:AddLabel("EXP: 0"), value = 0, oldval = player.PlayerFolder.Stats.Experience.Value},
     LVLs = {prefix = "LVLs: ", label = tab1:AddLabel("LVLs: 0"), value = 0, oldval = player.PlayerFolder.Stats.Level.Value},
-    Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
+    Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0}, 
     KoutarouAmon = {prefix = "Koutarou Amon Kills: ", label = tab5:AddLabel("Koutarou Amon Kills: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Koutarou Amon"].Value}
 
     
