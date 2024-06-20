@@ -141,46 +141,27 @@ player.PlayerFolder.Stats.Reputation.Changed:Connect(function(newValue)
 end)
 
 player.PlayerFolder.Stats.Level.Changed:Connect(function(newValue)
-    labels("LVLs", newValue - labels.Level.oldval, newValue)
+    labels("LVLs", newValue - labels.LVLs.oldval, newValue)
 end)
 
-player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
-    local deltaEXP = newValue - labels.EXP.oldval
-    if deltaEXP > 0 then
-        labels("EXP", deltaEXP, newValue)
-        labels.EXP.oldval = newValue
-    elseif newValue < labels.EXP.oldval then
-        -- Handle the case when EXP value resets (due to leveling up)
-        labels.EXP.oldval = newValue
-    end
-end)
+local bossKillStats = {
+    Touka = "Touka Kirishima",
+    Nishiki = "Nishiki Nishio",
+    Amon = "Koutarou Amon",
+    Eto = "Eto Yoshimura"
+}
 
-local function addBossKillListener(bossName, labelKey)
-    local bossKills = player.PlayerFolder.BossKills:FindFirstChild(bossName)
-    if bossKills then
-        local bossKillsValue = bossKills.Value
-
-        labels[labelKey] = {
-            prefix = bossName .. ": ",
-            label = tab5:AddLabel(bossName .. " kills: 0"),
-            value = 0,
-            oldval = bossKillsValue
-        }
-
-        bossKills.Changed:Connect(function(newValue)
+for labelKey, bossName in pairs(bossKillStats) do
+    local bossStat = player.PlayerFolder.BossKills:FindFirstChild(bossName)
+    if bossStat then
+        bossStat.Changed:Connect(function(newValue)
             labels(labelKey, newValue - labels[labelKey].oldval, newValue)
         end)
-
-        labels(labelKey, bossKillsValue)
+        labels(labelKey, bossStat.Value)
     else
         warn(bossName .. " stat not found!")
     end
 end
-
-addBossKillListener("Touka Kirishima", "Touka")
-addBossKillListener("Nishiki Nishio", "Nishiki")
-addBossKillListener("Koutarou Amon", "Amon")
-addBossKillListener("Eto Yoshimura", "Eto")
 
 btn3 = tab1:AddButton("Reset", function() labels() end)
 
