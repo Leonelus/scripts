@@ -104,7 +104,7 @@ labels = setmetatable({
     Touka = {prefix = "Touka: ", label = tab5:AddLabel("Touka: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Touka Kirishima"]Value},
     Nishiki = {prefix = "Nishiki: ", label = tab5:AddLabel("Nishiki: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Nishiki Nishio"]Value},
     Amon = {prefix = "Amon: ", label = tab5:AddLabel("Amon: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Koutarou Amon"]Value},
-    Eto = {prefix = "Eto: ", label = tab5:AddLabel("Eto: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Eto Yoshimura"]Value},
+    Eto = {prefix = "Eto: ", label = tab5:AddLabel("Eto: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Eto Yoshimura"]Value}
     
 }, {
     __call = function (self, typ, newv, oldv)
