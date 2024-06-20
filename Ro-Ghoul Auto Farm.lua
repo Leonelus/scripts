@@ -10,7 +10,7 @@ local get = setmetatable({}, {
     end
 })
 
-local tab1, tab2, tab3, tab4 = gui:AddTab("Main"), gui:AddTab("Farm Options"), gui:AddTab("Trainer"), gui:AddTab("Misc")
+local tab1, tab2, tab3, tab4, tab5 = gui:AddTab("Main"), gui:AddTab("Farm Options"), gui:AddTab("Trainer"), gui:AddTab("Misc"), gui:AddTab("Boss kills")
 local btn, btn2, btn3, key, nmc, trainers, labels
 local findobj, findobjofclass, waitforobj, fire, invoke = get.FindFirstChild, get.FindFirstChildOfClass, get.WaitForChild, Instance.new("RemoteEvent").FireServer, Instance.new("RemoteFunction").InvokeServer
 local player = get.Players.LocalPlayer
@@ -101,6 +101,11 @@ labels = setmetatable({
     EXP = {prefix = "EXP: ", label = tab1:AddLabel("EXP: 0"), value = 0, oldval = player.PlayerFolder.Stats.Experience.Value},
     LVLs = {prefix = "LVLs: ", label = tab1:AddLabel("LVLs: 0"), value = 0, oldval = player.PlayerFolder.Stats.Level.Value},
     Kills = {prefix = "Kills: ", label = tab1:AddLabel("Kills: 0"), value = 0} 
+    Touka = {prefix = "Touka: ", label = tab5:AddLabel("Touka: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Touka Kirishima"]Value},
+    Nishiki = {prefix = "Nishiki: ", label = tab5:AddLabel("Nishiki: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Nishiki Nishio"]Value},
+    Amon = {prefix = "Amon: ", label = tab5:AddLabel("Amon: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Koutarou Amon"]Value},
+    Eto = {prefix = "Eto: ", label = tab5:AddLabel("Eto: 0"), value = 0, oldval = player.PlayerFolder.BossKills["Eto Yoshimura"]Value},
+    
 }, {
     __call = function (self, typ, newv, oldv)
         if typ and newv then
