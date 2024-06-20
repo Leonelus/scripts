@@ -155,6 +155,22 @@ player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
     end
 end)
 
+player.PlayerFolder.BossKills["Touka Kirishima"].Changed:Connect(function(newValue)
+    labels("Touka", newValue - labels.KoutarouAmonKills.oldval, newValue)
+end)
+
+player.PlayerFolder.BossKills["Nishiki Nishio"].Changed:Connect(function(newValue)
+    labels("Nishiki", newValue - labels.KoutarouAmonKills.oldval, newValue)
+end)
+
+player.PlayerFolder.BossKills["Koutarou Amon"].Changed:Connect(function(newValue)
+    labels("Amon", newValue - labels.KoutarouAmonKills.oldval, newValue)
+end)
+
+player.PlayerFolder.BossKills["Eto Yoshimura"].Changed:Connect(function(newValue)
+    labels("Eto", newValue - labels.KoutarouAmonKills.oldval, newValue)
+end)
+
 btn3 = tab1:AddButton("Reset", function() labels() end)
 
 if team == "CCG" then tab2:AddLabel("Quinque Stage") else tab2:AddLabel("Kagune Stage") end
