@@ -155,21 +155,32 @@ player.PlayerFolder.Stats.Experience.Changed:Connect(function(newValue)
     end
 end)
 
-player.PlayerFolder.BossKills["Touka Kirishima"].Changed:Connect(function(newValue)
-    labels("Touka", newValue - labels.KoutarouAmonKills.oldval, newValue)
-end)
+local function addBossKillListener(bossName, labelKey)
+    local bossKills = player.PlayerFolder.BossKills:FindFirstChild(bossName)
+    if bossKills then
+        local bossKillsValue = bossKills.Value
 
-player.PlayerFolder.BossKills["Nishiki Nishio"].Changed:Connect(function(newValue)
-    labels("Nishiki", newValue - labels.KoutarouAmonKills.oldval, newValue)
-end)
+        labels[labelKey] = {
+            prefix = bossName .. ": ",
+            label = tab5:AddLabel(bossName .. " kills: 0"),
+            value = 0,
+            oldval = bossKillsValue
+        }
 
-player.PlayerFolder.BossKills["Koutarou Amon"].Changed:Connect(function(newValue)
-    labels("Amon", newValue - labels.KoutarouAmonKills.oldval, newValue)
-end)
+        bossKills.Changed:Connect(function(newValue)
+            labels(labelKey, newValue - labels[labelKey].oldval, newValue)
+        end)
 
-player.PlayerFolder.BossKills["Eto Yoshimura"].Changed:Connect(function(newValue)
-    labels("Eto", newValue - labels.KoutarouAmonKills.oldval, newValue)
-end)
+        labels(labelKey, bossKillsValue)
+    else
+        warn(bossName .. " stat not found!")
+    end
+end
+
+addBossKillListener("Touka Kirishima", "Touka")
+addBossKillListener("Nishiki Nishio", "Nishiki")
+addBossKillListener("Koutarou Amon", "Amon")
+addBossKillListener("Eto Yoshimura", "Eto")
 
 btn3 = tab1:AddButton("Reset", function() labels() end)
 
