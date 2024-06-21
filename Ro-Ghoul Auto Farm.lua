@@ -15,6 +15,20 @@ local btn, btn2, btn3, key, nmc, trainers, labels
 local findobj, findobjofclass, waitforobj, fire, invoke = get.FindFirstChild, get.FindFirstChildOfClass, get.WaitForChild, Instance.new("RemoteEvent").FireServer, Instance.new("RemoteFunction").InvokeServer
 local player = get.Players.LocalPlayer
 
+local function updateCamera()
+    local character = player.Character
+    if character then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local lookVector = humanoidRootPart.CFrame.lookVector
+            local cameraOffset = Vector3.new(0, 2, 0) -- Adjust the offset as needed
+            local cameraPosition = humanoidRootPart.Position + lookVector * -10 + cameraOffset -- Adjust the distance and offset
+
+            game.Workspace.CurrentCamera.CFrame = CFrame.lookAt(cameraPosition, humanoidRootPart.Position)
+        end
+    end
+end
+
 repeat wait() until player:FindFirstChild("PlayerFolder")
 
 local team, remotes, stat = player.PlayerFolder.Customization.Team.Value, get.ReplicatedStorage.Remotes, player.PlayerFolder.StatsFunction
