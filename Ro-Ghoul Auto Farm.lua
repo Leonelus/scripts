@@ -291,6 +291,9 @@ for i,v in pairs(array.skills) do
     end):Set(myData.Skills[i])
 end
 
+tab4:AddSwitch("Use skills on NPCs", function(bool) array.skillsNPC = bool end)
+tab4:AddSwitch("Normal teleport on bosses", function(bool) array.BossTP = bool end)
+
 do
     local count = 0
     for i,v in pairs(player.PlayerGui.HUD.StagesFrame.InfoScroll:GetChildren()) do
@@ -525,7 +528,7 @@ while true do
 
                     labels("text", "Moving to: "..npc.Name)
 
-                    if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" then
+                    if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" and not array.BossTP then
                         tp(npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90),0,0) + Vector3.new(0,myData.DistanceFromBoss,0))
                     else
                         tp(npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc)
@@ -540,7 +543,7 @@ while true do
                             if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque")  then
                                 pressKey(array.stage)
                             end
-                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" then 
+                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" or array.skillsNPC then 
                                 for x,y in pairs(myData.Skills) do
                                     if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
                                         pressKey(x)
