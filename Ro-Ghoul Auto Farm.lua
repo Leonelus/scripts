@@ -15,17 +15,20 @@ local btn, btn2, btn3, key, nmc, trainers, labels
 local findobj, findobjofclass, waitforobj, fire, invoke = get.FindFirstChild, get.FindFirstChildOfClass, get.WaitForChild, Instance.new("RemoteEvent").FireServer, Instance.new("RemoteFunction").InvokeServer
 local player = get.Players.LocalPlayer
 
-local function updateCamera()
+if player then
     local character = player.Character
-    if character then
-        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            local lookVector = humanoidRootPart.CFrame.lookVector
-            local cameraOffset = Vector3.new(0, 2, 0) -- Adjust the offset as needed
-            local cameraPosition = humanoidRootPart.Position + lookVector * -10 + cameraOffset -- Adjust the distance and offset
+    local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
 
-            game.Workspace.CurrentCamera.CFrame = CFrame.lookAt(cameraPosition, humanoidRootPart.Position)
-        end
+    if humanoidRootPart then
+        -- Get the character's current facing direction
+        local lookVector = humanoidRootPart.CFrame.lookVector
+
+        -- Adjust the camera position slightly above the character's head
+        local cameraOffset = Vector3.new(0, 2, 0)
+        local cameraPosition = humanoidRootPart.Position + cameraOffset
+
+        -- Set the camera CFrame to look at the character's direction
+        game.Workspace.CurrentCamera.CFrame = CFrame.lookAt(cameraPosition, cameraPosition + lookVector)
     end
 end
 
