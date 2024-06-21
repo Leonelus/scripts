@@ -18,34 +18,33 @@ local camera = workspace.CurrentCamera
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local function setupCamera(character)
-    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local character = player.Character or player.CharacterAdded:Wait()
 
-    local connection -- Variable to hold the RenderStepped connection
-
-    connection = RunService.RenderStepped:Connect(function()
-        if humanoidRootPart then
-            local characterCFrame = humanoidRootPart.CFrame
-            local cameraOffset = characterCFrame.Position - (characterCFrame.LookVector * 10) + Vector3.new(0, 5, 0)
-            camera.CFrame = CFrame.new(cameraOffset, characterCFrame.Position)
-        else
-            -- Character is gone, disconnect the RenderStepped event
-            connection:Disconnect()
-        end
-    end)
+local function updateCamera()
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        local characterCFrame = humanoidRootPart.CFrame
+        local cameraOffset = characterCFrame.Position - (characterCFrame.LookVector * 10) + Vector3.new(0, 5, 0)
+        camera.CFrame = CFrame.new(cameraOffset, characterCFrame.Position)
+    end
 end
 
-player.CharacterAdded:Connect(function(character)
-    -- Clean up previous connections if any
-    if character and character:IsDescendantOf(game.Workspace) then
-        setupCamera(character)
-    end
+updateCamera()
+
+player.CharacterAdded:Connect(function(newCharacter)
+    character = newCharacter
+    updateCamera()
 end)
 
--- Initial setup in case character is already spawned
-if player.Character and player.Character:IsDescendantOf(game.Workspace) then
-    setupCamera(player.Character)
-end
+player.CharacterRemoving:Connect(function()
+    character = nil
+end)
+
+RunService.RenderStepped:Connect(function()
+    if character then
+        updateCamera()
+    end
+end)
 
 repeat wait() until player:FindFirstChild("PlayerFolder")
 
