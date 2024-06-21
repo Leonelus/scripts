@@ -14,23 +14,26 @@ local tab1, tab2, tab3, tab4, tab5 = gui:AddTab("Main"), gui:AddTab("Farm Option
 local btn, btn2, btn3, key, nmc, trainers, labels
 local findobj, findobjofclass, waitforobj, fire, invoke = get.FindFirstChild, get.FindFirstChildOfClass, get.WaitForChild, Instance.new("RemoteEvent").FireServer, Instance.new("RemoteFunction").InvokeServer
 local player = get.Players.LocalPlayer
+local camera = workspace.CurrentCamera
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 
-if player then
-    local character = player.Character
-    local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
 
-    if humanoidRootPart then
-        -- Get the character's current facing direction
-        local lookVector = humanoidRootPart.CFrame.lookVector
+-- Ensure the script runs when the character is added
+player.CharacterAdded:Connect(function(character)
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-        -- Adjust the camera position slightly above the character's head
-        local cameraOffset = Vector3.new(0, 2, 0)
-        local cameraPosition = humanoidRootPart.Position + cameraOffset
-
-        -- Set the camera CFrame to look at the character's direction
-        game.Workspace.CurrentCamera.CFrame = CFrame.lookAt(cameraPosition, cameraPosition + lookVector)
-    end
-end
+    -- Update the camera every frame to follow the character's facing direction
+    RunService.RenderStepped:Connect(function()
+        if humanoidRootPart then
+            -- Get the CFrame of the humanoid root part
+            local characterCFrame = humanoidRootPart.CFrame
+            -- Position the camera behind the character
+            local cameraOffset = characterCFrame.Position - (characterCFrame.LookVector * 10) + Vector3.new(0, 5, 0)
+            camera.CFrame = CFrame.new(cameraOffset, characterCFrame.Position)
+        end
+    end)
+end)
 
 repeat wait() until player:FindFirstChild("PlayerFolder")
 
