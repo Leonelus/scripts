@@ -549,7 +549,7 @@ while true do
                                         pressKey(x)
                                     end
                                 end
-                              if not array.BossTp then
+                              if not array.BossTP then
                                         player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90),0,0) + Vector3.new(0,myData.DistanceFromBoss ,0)
                                     end
                             else
