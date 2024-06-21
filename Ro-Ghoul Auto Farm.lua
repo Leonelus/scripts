@@ -18,22 +18,34 @@ local camera = workspace.CurrentCamera
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-
--- Ensure the script runs when the character is added
-player.CharacterAdded:Connect(function(character)
+local function setupCamera(character)
     local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-    -- Update the camera every frame to follow the character's facing direction
-    RunService.RenderStepped:Connect(function()
+    local connection -- Variable to hold the RenderStepped connection
+
+    connection = RunService.RenderStepped:Connect(function()
         if humanoidRootPart then
-            -- Get the CFrame of the humanoid root part
             local characterCFrame = humanoidRootPart.CFrame
-            -- Position the camera behind the character
             local cameraOffset = characterCFrame.Position - (characterCFrame.LookVector * 10) + Vector3.new(0, 5, 0)
             camera.CFrame = CFrame.new(cameraOffset, characterCFrame.Position)
+        else
+            -- Character is gone, disconnect the RenderStepped event
+            connection:Disconnect()
         end
     end)
+end
+
+player.CharacterAdded:Connect(function(character)
+    -- Clean up previous connections if any
+    if character and character:IsDescendantOf(game.Workspace) then
+        setupCamera(character)
+    end
 end)
+
+-- Initial setup in case character is already spawned
+if player.Character and player.Character:IsDescendantOf(game.Workspace) then
+    setupCamera(player.Character)
+end
 
 repeat wait() until player:FindFirstChild("PlayerFolder")
 
