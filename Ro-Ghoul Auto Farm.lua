@@ -585,24 +585,23 @@ while true do
                                     else
                                         player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc 
                                     end
-                            end
-                            elseif array.skillsNPC then
-                                for x, y in pairs(myData.Skills) do
-                                    if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
-                                        pressKey(x)
+                                elseif array.skillsNPC then
+                                    for x, y in pairs(myData.Skills) do
+                                        if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
+                                            pressKey(x)
+                                        end
                                     end
-                                end
-                                if not array.BossTP then
-                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromNpc, 0)
+                                    if not array.BossTP then
+                                        player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromNpc, 0)
+                                    else
+                                        player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
+                                    end
                                 else
                                     player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
                                 end
-                            else
-                                player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
-                            end
-                            if player.PlayerFolder.CanAct.Value then
-                                pressKey("Mouse1")
-                            end                           
+                                if player.PlayerFolder.CanAct.Value then
+                                    pressKey("Mouse1")
+                                end
                         if npc.Name == "Gyakusatsu" then
                             player.Character.Humanoid.Health = 0
                         end
