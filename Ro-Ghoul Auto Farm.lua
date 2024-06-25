@@ -574,7 +574,7 @@ while true do
                             if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque")  then
                                 pressKey(array.stage)
                             end
-                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" or array.skillsNPC then 
+                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" then
                                 for x,y in pairs(myData.Skills) do
                                     if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
                                         pressKey(x)
@@ -586,6 +586,21 @@ while true do
                             else
                                 player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc 
                             end
+                            elseif array.skillsNPC then
+                                for x, y in pairs(myData.Skills) do
+                                    if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
+                                        pressKey(x)
+                                    end
+                                end
+                                if not array.BossTP then 
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromNpc, 0)
+                                else
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
+                                end
+                            else
+                                player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
+                            end
+                                        
                             if player.PlayerFolder.CanAct.Value then
                                 pressKey("Mouse1")
                             end
