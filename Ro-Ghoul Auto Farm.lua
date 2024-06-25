@@ -580,7 +580,7 @@ while true do
                                         pressKey(x)
                                     end
                                 end
-                              if not array.BossTP then
+                                    if not array.BossTP then
                                         player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90),0,0) + Vector3.new(0,myData.DistanceFromBoss ,0)
                                     else
                                         player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc 
@@ -599,11 +599,14 @@ while true do
                                 else
                                     player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
                                 end
+                                
                                 if player.PlayerFolder.CanAct.Value then
                                     pressKey("Mouse1")
                                 end
                                 task.wait()
                             end
+                        end 
+                        
                         if npc.Name == "Gyakusatsu" then
                             player.Character.Humanoid.Health = 0
                         end
