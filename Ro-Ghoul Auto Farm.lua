@@ -605,7 +605,6 @@ while true do
                                 end
                                 task.wait()
                             end
-                        end 
                         
                         if npc.Name == "Gyakusatsu" then
                             player.Character.Humanoid.Health = 0
