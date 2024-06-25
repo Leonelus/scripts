@@ -531,7 +531,7 @@ while true do
     if array.autofarm then
         pcall(function()
             if player.Character.Humanoid.Health > 0 and player.Character.HumanoidRootPart and player.Character.Remotes.KeyEvent then
-                if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque")  then
+                if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque") then
                     pressKey(array.stage)
                 end
                 if myData.ReputationFarm and (not findobj(player.PlayerFolder.CurrentQuest.Complete, "Aogiri Member") or player.PlayerFolder.CurrentQuest.Complete["Aogiri Member"].Value == player.PlayerFolder.CurrentQuest.Complete["Aogiri Member"].Max.Value) then
@@ -557,48 +557,61 @@ while true do
                         end
                     end)()
 
-                    labels("text", "Moving to: "..npc.Name)
+                    labels("text", "Moving to: " .. npc.Name)
 
                     if (myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn") and not array.BossTP then
-                        tp(npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90),0,0) + Vector3.new(0,myData.DistanceFromBoss,0))
+                        tp(npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromBoss, 0))
                     else
                         tp(npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc)
                     end
 
-                    labels("text", "Killing: "..npc.Name)
-                    
+                    labels("text", "Killing: " .. npc.Name)
+
                     reached = true
 
                     if not array.found then
                         while findobj(findobj(npc.Parent, npc.Name), "Head") and player.Character.Humanoid.Health > 0 and array.autofarm do
-                            if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque")  then
+                            if not findobj(player.Character, "Kagune") and not findobj(player.Character, "Quinque") then
                                 pressKey(array.stage)
                             end
-                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" or array.skillsNPC then 
-                                for x,y in pairs(myData.Skills) do
+                            if myData.Boss[npc.Name] or npc.Parent.Name == "GyakusatsuSpawn" then
+                                for x, y in pairs(myData.Skills) do
                                     if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
                                         pressKey(x)
                                     end
                                 end
-                              if not array.BossTP then
-                                        player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90),0,0) + Vector3.new(0,myData.DistanceFromBoss ,0)
+                                if not array.BossTP then
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromBoss, 0)
+                                else
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromBoss
+                                end
+                            elseif array.skillsNPC then
+                                for x, y in pairs(myData.Skills) do
+                                    if player.PlayerFolder.CanAct.Value and y and array.skills[x].Value ~= "DownTime" then
+                                        pressKey(x)
                                     end
+                                end
+                                if not array.BossTP then
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), 0, 0) + Vector3.new(0, myData.DistanceFromNpc, 0)
+                                else
+                                    player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
+                                end
                             else
-                                player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame + npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc 
+                                player.Character.HumanoidRootPart.CFrame = npc.HumanoidRootPart.CFrame.lookVector * myData.DistanceFromNpc
                             end
                             if player.PlayerFolder.CanAct.Value then
                                 pressKey("Mouse1")
                             end
                             task.wait()
                         end
-                        
+
                         if npc.Name == "Gyakusatsu" then
                             player.Character.Humanoid.Health = 0
                         end
 
                         if array.autofarm and player.Character.Humanoid.Health > 0 then
                             labels("Kills", 1)
-                            if npc.Name ~= "Eto Yoshimura" and not findobj(npc.Parent, "Gyakusatsu") and npc.Name ~= "Gyakusatsu" then  
+                            if npc.Name ~= "Eto Yoshimura" and not findobj(npc.Parent, "Gyakusatsu") and npc.Name ~= "Gyakusatsu" then
                                 labels("text", "Collecting corpse...")
                                 collect(npc)
                             end
