@@ -602,6 +602,8 @@ while true do
                                 if player.PlayerFolder.CanAct.Value then
                                     pressKey("Mouse1")
                                 end
+                                task.wait()
+                            end
                         if npc.Name == "Gyakusatsu" then
                             player.Character.Humanoid.Health = 0
                         end
