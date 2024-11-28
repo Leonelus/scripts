@@ -1153,7 +1153,7 @@ repeat task.wait() until game.Players.LocalPlayer
 				["Callback Delay"] = 0.5,
 				["StandToggles"] = {},
 				["ItemToggles"] = {},
-				["Auto Hop"] = true,
+				["Auto Hop"] = false,
 				["Auto_SF"] = false,
 				["All Shiny Farm"] = true,
 				["Shiny Farm"] = false,
